@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.syscode.syscode.domain.Empresa;
@@ -29,8 +30,8 @@ public class ListaResources {
 	}
 	
 	@GetMapping("/nome")
-	public List<Lista> findLista() {
-		 List<Lista> lis =  listaRepository.findByLista("Safety Day");
+	public List<Lista> findLista(@RequestParam String lista) {
+		 List<Lista> lis =  listaRepository.findByLista(lista);
 		 return lis;
 	}
 	

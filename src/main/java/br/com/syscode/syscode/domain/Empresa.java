@@ -45,13 +45,6 @@ public class Empresa implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data_cadastro;
 	
-	
-	public String getEmpresanome() {
-		return empresa;
-	}
-	public void setEmpresanome(String empresanome) {
-		this.empresa = empresanome;
-	}
 	public String getEmpresa() {
 		return empresa;
 	}
