@@ -21,7 +21,6 @@ public class Empresa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_empresa;
-	private String empresa_nome;
 	private String endereco;
 	private String bairro;
 	private String cep;
@@ -46,6 +45,13 @@ public class Empresa implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data_cadastro;
 	
+	
+	public String getEmpresanome() {
+		return empresa;
+	}
+	public void setEmpresanome(String empresanome) {
+		this.empresa = empresanome;
+	}
 	public String getEmpresa() {
 		return empresa;
 	}
@@ -57,12 +63,6 @@ public class Empresa implements Serializable{
 	}
 	public void setId_empresa(Long id_empresa) {
 		this.id_empresa = id_empresa;
-	}
-	public String getEmpresa_nome() {
-		return empresa_nome;
-	}
-	public void setEmpresa_nome(String empresa_nome) {
-		this.empresa_nome = empresa_nome;
 	}
 	public String getEndereco() {
 		return endereco;
@@ -197,7 +197,7 @@ public class Empresa implements Serializable{
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((email_desc == null) ? 0 : email_desc.hashCode());
-		result = prime * result + ((empresa_nome == null) ? 0 : empresa_nome.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + (fornecedor ? 1231 : 1237);
 		result = prime * result + (habilitado ? 1231 : 1237);
@@ -263,10 +263,10 @@ public class Empresa implements Serializable{
 				return false;
 		} else if (!email_desc.equals(other.email_desc))
 			return false;
-		if (empresa_nome == null) {
-			if (other.empresa_nome != null)
+		if (empresa == null) {
+			if (other.empresa != null)
 				return false;
-		} else if (!empresa_nome.equals(other.empresa_nome))
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)

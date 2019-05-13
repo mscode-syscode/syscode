@@ -15,7 +15,7 @@ import br.com.syscode.syscode.repository.ListaRepository;
 
 @RestController
 @RequestMapping("/lista")
-public class LIstaResources {
+public class ListaResources {
 	
 	private final Logger log = LoggerFactory.getLogger(Empresa.class);
 	@Autowired
@@ -26,6 +26,12 @@ public class LIstaResources {
 		log.info("Buscando todas as listas");
 		List<Lista> listas = listaRepository.findAll();
 		return listas;
+	}
+	
+	@GetMapping("/nome")
+	public List<Lista> findLista() {
+		 List<Lista> lis =  listaRepository.findByLista("Safety Day");
+		 return lis;
 	}
 	
 	

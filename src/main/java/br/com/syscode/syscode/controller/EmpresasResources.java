@@ -54,14 +54,19 @@ public class EmpresasResources {
 		return empresas != null ? ResponseEntity.ok(empresas) : ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping("/empresa/{empresa}")
-	public  String findNome(@RequestParam(required = false, defaultValue = "%") String empresa){
-	 	//Optional<Empresa> empresaNome = empresaRepository.findByEmpresa(empresa); 
-		String empresaNome = "";
-		return empresaNome;
+	@GetMapping("/empresa/nome")
+	public  List<Empresa> findNome(@RequestParam("empresa") String empresa){
+	 	
+		System.out.println(empresa);
+		List<Empresa> empresaNome = empresaRepository.findByEmpresa(empresa); 
+		
+	 	for (Empresa empresa2 : empresaNome) {
+			System.out.println(empresa2.getEmpresa());
+		}
+	 	return empresaNome;
 	}
 	
-	@GetMapping("/empresa/{bairro}")
+	@GetMapping("/empresa/bairro")
 	@ResponseBody
 	public  List<Empresa> findbairro(@RequestParam("bairro") String bairro){
 		List<Empresa> empresaNome = empresaRepository.findByBairro(bairro); 
@@ -70,7 +75,7 @@ public class EmpresasResources {
 	
 	@PostMapping
 	public void saveEmpresa(@RequestBody Empresa empresa) {
-		log.info("Persistindo a empresa: " + empresa.getEmpresa_nome());
+		log.info("Persistindo a empresa: " + empresa.getEmpresa());
 		empresaRepository.save(empresa);
 	}
 	
