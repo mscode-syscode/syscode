@@ -2,11 +2,16 @@ package br.com.syscode.syscode.domain;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,8 +25,8 @@ public class Empresa implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_empresa;
-	private String empresa_nome;
+	@Column(name="idempresa")
+	private Long idempresa;
 	private String endereco;
 	private String bairro;
 	private String cep;
@@ -46,24 +51,29 @@ public class Empresa implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data_cadastro;
 	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="idempresa", cascade = CascadeType.ALL)
+	private List<Job>job;
+	
+	public List<Job> getJob() {
+		return job;
+	}
+	public void setJob(List<Job> job) {
+		this.job = job;
+	}
+	public Long getIdempresa() {
+		return idempresa;
+	}
+	public void setIdempresa(Long idempresa) {
+		this.idempresa = idempresa;
+	}
 	public String getEmpresa() {
 		return empresa;
 	}
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
-	public Long getId_empresa() {
-		return id_empresa;
-	}
-	public void setId_empresa(Long id_empresa) {
-		this.id_empresa = id_empresa;
-	}
-	public String getEmpresa_nome() {
-		return empresa_nome;
-	}
-	public void setEmpresa_nome(String empresa_nome) {
-		this.empresa_nome = empresa_nome;
-	}
+	
 	public String getEndereco() {
 		return endereco;
 	}
@@ -197,11 +207,11 @@ public class Empresa implements Serializable{
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((email_desc == null) ? 0 : email_desc.hashCode());
-		result = prime * result + ((empresa_nome == null) ? 0 : empresa_nome.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + (fornecedor ? 1231 : 1237);
 		result = prime * result + (habilitado ? 1231 : 1237);
-		result = prime * result + ((id_empresa == null) ? 0 : id_empresa.hashCode());
+		result = prime * result + ((idempresa == null) ? 0 : idempresa.hashCode());
 		result = prime * result + ((logotipo == null) ? 0 : logotipo.hashCode());
 		result = prime * result + ((obs == null) ? 0 : obs.hashCode());
 		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
@@ -263,10 +273,10 @@ public class Empresa implements Serializable{
 				return false;
 		} else if (!email_desc.equals(other.email_desc))
 			return false;
-		if (empresa_nome == null) {
-			if (other.empresa_nome != null)
+		if (empresa == null) {
+			if (other.empresa != null)
 				return false;
-		} else if (!empresa_nome.equals(other.empresa_nome))
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (endereco == null) {
 			if (other.endereco != null)
@@ -277,10 +287,10 @@ public class Empresa implements Serializable{
 			return false;
 		if (habilitado != other.habilitado)
 			return false;
-		if (id_empresa == null) {
-			if (other.id_empresa != null)
+		if (idempresa == null) {
+			if (other.idempresa != null)
 				return false;
-		} else if (!id_empresa.equals(other.id_empresa))
+		} else if (!idempresa.equals(other.idempresa))
 			return false;
 		if (logotipo == null) {
 			if (other.logotipo != null)
